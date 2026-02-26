@@ -21,7 +21,9 @@
 
 :root {
     --text-color: #020202;
+    /* 020202 */
     --bg-color: #d3d3d3;
+    /* d3d3d3 */
     --highlight-color: #ffb300;
 }
 
@@ -114,7 +116,7 @@ body {
     height: 100%;
     z-index: 7123;
     /* background-color: black; */
-    border: 5px dotted black;
+    border: 5px dotted var(--text-color);
     transform-origin: top;
     scale: 1 0;
     animation: scrollBar linear;
@@ -486,7 +488,7 @@ main .skills {
     width: 100%;
     min-height: 100vh;
     margin-bottom: 20px;
-    border-bottom: 2px dotted black;
+    border-bottom: 2px dotted var(--text-color);
 }
 
 .skills h1 {
@@ -495,6 +497,7 @@ main .skills {
     font-weight: 200;
     text-align: center;
     margin: 50px 0;
+    color: var(--text-color);
 }
 
 .skills ul {
@@ -511,6 +514,7 @@ main .skills {
     text-align: left;
     margin: 20px 0;
     border-bottom: 2px dotted var(--text-color);
+    color: var(--text-color);
 }
 
 .skills ul li {
@@ -522,6 +526,7 @@ main .skills {
     font-size: 2rem;
     display: flex;
     align-items: center;
+    color: var(--text-color);
 }
 
 .skills ul li i {
@@ -596,6 +601,7 @@ main .skills {
     font-family: "Doto", cursive;
     font-weight: 200;
     text-align: center;
+    color: var(--text-color);
 }
 
 #message .holder {
@@ -629,6 +635,7 @@ main .skills {
 #certificates .desc h2 {
     font-size: 3rem;
     font-family: "Doto", cursive;
+    color: var(--text-color);
     font-weight: 300;
     transform: scaleY(1.2);
     text-align: center;
@@ -639,6 +646,7 @@ main .skills {
 #certificates .desc p {
     font-size: 1.5rem;
     font-family: "Editorial", cursive;
+    color: var(--text-color);
     font-weight: 200;
     text-align: center;
     letter-spacing: 2px;
