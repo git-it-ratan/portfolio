@@ -500,92 +500,125 @@ main .skills {
     color: var(--text-color);
 }
 
-.skills ul {
-    padding: 0;
-    margin: 0;
+.skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.skill-card {
+    border: 2px dotted var(--text-color);
+    padding: 30px;
+    background-color: transparent;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
     overflow: hidden;
 }
 
-.skills ul h3 {
-    display: inline-block;
-    font-size: 2rem;
-    font-family: "Doto", cursive;
-    font-weight: 400;
-    text-align: left;
-    margin: 20px 0;
-    border-bottom: 2px dotted var(--text-color);
-    color: var(--text-color);
-}
-
-.skills ul li {
-    padding: 20px 10px;
-    font-family: "Geist", sans-serif;
-    font-size: 2rem;
-    /* border-bottom: 2px dotted black; */
-    transition: all 0.3s ease-in-out;
-    font-size: 2rem;
+.card-header {
     display: flex;
     align-items: center;
+    border-bottom: 2px dotted var(--text-color);
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.card-header .num {
+    font-family: "Doto", sans-serif;
+    font-size: 4rem;
+    margin-right: 30px;
     color: var(--text-color);
+    font-weight: 200;
 }
 
-.skills ul li i {
-    margin-right: 20px;
-}
-
-.skills ul li svg {
-    margin-right: 20px;
-}
-
-
-
-.skills ul li span {
-    display: inline-block;
-    width: 70%;
-    font-size: 1rem;
-    margin-left: 20px;
-}
-
-.dsa-skill {
-    position: relative;
-    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.3s;
-    /* background-color: burlywood; */
-}
-
-.dsa-skill .leetcode-tooltip {
-    position: absolute;
-    border: 2px dotted var(--text-color);
-    width: 220px;
-    height: 50px;
-    display: grid;
-    place-items: center;
-    left: 20%;
-    display: none;
-    /* transform: skewX(10deg); */
-}
-
-.dsa-skill .leetcode-tooltip a {
+.card-header h3 {
+    font-family: "Kenoky", sans-serif;
+    font-size: 3rem;
+    font-weight: 300;
     color: var(--text-color);
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: 600;
+    margin: 0;
+}
+
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.card-tags span:not(.dsa-tag) {
     font-family: "Geist", sans-serif;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border: 1px solid var(--text-color);
+    /* border-radius: 50px; */
+    color: var(--text-color);
+    background-color: transparent;
+    transition: all 0.3s ease;
+    cursor: default;
 }
 
-.dsa-skill:hover .leetcode-tooltip {
-    display: grid;
-    animation: tooltipFadeIn 0.3s ease-in-out forwards;
-}
-
-.skills ul li:nth-child(even):hover {
+.card-tags span:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
     transform: scale(1.05);
-    transform-origin: left;
 }
 
+.dsa-tag {
+    background-color: var(--text-color);
+    font-family: "Geist", sans-serif;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border: 1px solid var(--text-color);
+    color: var(--bg-color);
+    transition: all 0.3s ease;
+    cursor: default;
+    position: relative;
+    cursor: pointer !important;
+}
 
-.skills ul li:nth-child(odd):hover {
-    transform: scale(1.05);
-    transform-origin: left;
+.leetcode-btn {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding: 5px 15px;
+    border: 1px dotted var(--text-color);
+    /* border-radius: 50px; */
+    text-decoration: none;
+    font-family: "Geist", sans-serif;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.leetcode-btn::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: transparent;
+}
+
+.dsa-tag:hover .leetcode-btn {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+.leetcode-btn:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
 }
 
 #message {
@@ -745,14 +778,290 @@ footer .deco p {
     /* background-color: cadetblue; */
 }
 
+/* --- Project Modal --- */
+.project-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(211, 211, 211, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 100000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
 
+.project-modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.project-modal-content {
+    background-color: var(--bg-color);
+    width: 80%;
+    max-width: 900px;
+    padding: 40px;
+    position: relative;
+    border: 2px dotted var(--text-color);
+    /* box-shadow: 10px 10px 0px var(--text-color); */
+    display: flex;
+    flex-direction: column;
+    color: var(--text-color);
+    transform: translateY(50px);
+    transition: transform 0.4s ease;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.project-modal.active .project-modal-content {
+    transform: translateY(0);
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-color);
+    transition: transform 0.3s ease;
+}
+
+.close-modal:hover {
+    transform: scale(1.1);
+}
+
+.modal-top {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.modal-image {
+    flex: 1;
+    background-color: #dcdcdc;
+    aspect-ratio: 16/9;
+    max-height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.modal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-title {
+    flex: 1;
+}
+
+.modal-title h2 {
+    font-family: "Kenoky", sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+}
+
+.visit-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    /* background-color: var(--text-color); */
+    border: 2px dotted var(--text-color);
+    color: var(--text-color);
+    text-decoration: none;
+    font-family: "Geist", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.visit-btn:hover {
+    transform: translateY(-3px);
+}
+
+.modal-middle {
+    position: relative;
+    margin-bottom: 40px;
+    min-height: 8em;
+    flex-shrink: 0;
+    /* background-color: #a01b1b; */
+}
+
+.modal-desc-content {
+    position: relative;
+    z-index: 2;
+    font-family: "Geist", sans-serif;
+    font-size: 1.2rem;
+    line-height: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* background-color: #1199aa; */
+}
+
+.desc-label {
+    font-weight: 700;
+    font-size: 1.5rem;
+    /* background-color: #ffffff; */
+    padding-right: 10px;
+}
+
+#modalDesc {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    line-height: 2rem;
+}
+
+.modal-bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-shrink: 0;
+}
+
+.modal-col {
+    flex: 1;
+}
+
+.modal-col h4 {
+    font-family: "Geist", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.color-circles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    max-width: 200px;
+}
+
+.color-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid var(--text-color);
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.color-tooltip {
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-family: "Geist", sans-serif;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+    z-index: 10;
+}
+
+.color-circle:hover .color-tooltip {
+    opacity: 1;
+}
+
+#modalFonts,
+#modalTech {
+    list-style: none;
+    padding: 0;
+    font-family: "Geist", sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.8;
+}
+
+#modalFonts li,
+#modalTech li {
+    margin-bottom: 8px;
+}
+
+/* --- Responsive Design --- */
+
+/* Tablets & Small Laptops (Max Width 1024px) */
+@media (max-width: 1024px) {
+    main .hero h1 .fName {
+        font-size: 10rem;
+    }
+
+    main .hero h1 .lName {
+        font-size: 7rem;
+    }
+
+    main .hero p {
+        width: 80%;
+    }
+
+    .college-image {
+        width: 150px;
+        top: 200px;
+    }
+
+    .layout {
+        columns: 1;
+    }
+
+    #certificates {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+    }
+
+    #certificates .desc {
+        padding: 40px 0;
+    }
+
+    footer {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        grid-template-areas:
+            "item1"
+            "item2"
+            "item3";
+        height: auto;
+        gap: 20px;
+    }
+
+    footer h1 {
+        font-size: 8rem;
+    }
+
+    footer .footer-links {
+        padding-bottom: 20px;
+        justify-content: center;
+    }
+}
+
+/* Tablets & Large Phones (Max Width 768px) */
 @media (max-width: 768px) {
+    nav {
+        padding: 0 10px;
+    }
+
     nav .name p {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
 
     nav .links {
-        width: 55%;
+        width: 60%;
     }
 
     nav .links ul {
@@ -764,58 +1073,203 @@ footer .deco p {
     }
 
     main .hero {
-        width: 100%;
-        min-height: 105vh;
-        border-bottom: 2px dotted var(--text-color);
-        /* padding: 20px 0; */
-        margin: 20px 0;
-        /* background-color: springgreen; */
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-evenly;
-        flex-direction: column;
-        color: var(--text-color);
+        min-height: auto;
+        padding-top: 100px;
+        align-items: center;
+        text-align: center;
     }
 
     main .hero h1 .fName {
-        font-size: 8rem;
+        font-size: 6rem;
         margin-bottom: 0px;
     }
 
     main .hero h1 .lName {
-        font-size: 5rem;
+        font-size: 4rem;
     }
 
     main .hero p {
-        padding-left: 0;
+        width: 95%;
+        font-size: 1rem;
+        line-height: 25px;
+        text-align: center;
+        margin-top: 50px;
+    }
 
+    .college-image {
+        display: none;
+    }
+
+    .projects h1,
+    .skills h1 {
+        font-size: 4rem;
+        margin: 30px 0;
+    }
+
+    .layout .project-item,
+    .layout .item1,
+    .layout .item4 {
+        height: 300px;
+    }
+
+    .skills-grid {
+        gap: 20px;
+    }
+
+    .skill-card {
+        padding: 20px;
+    }
+
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .card-header .num {
+        font-size: 2.5rem;
+    }
+
+    .card-header h3 {
+        font-size: 2rem;
+    }
+
+    .card-tags span,
+    .dsa-tag {
+        font-size: 1rem;
+        padding: 8px 15px;
+    }
+
+    /* Modal Responsiveness */
+    .modal-top {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .modal-bottom {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .modal-title h2 {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .project-modal-content {
+        padding: 20px;
+        width: 95%;
+    }
+
+    .modal-col {
+        text-align: center;
+    }
+
+    .color-circles {
+        justify-content: center;
+        max-width: 100%;
+    }
+
+    #message h1 {
+        font-size: 25vw;
+    }
+
+    footer h1 {
+        font-size: 5rem;
+    }
+
+    footer .footer-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .footer-links ul {
+        text-align: center;
+    }
+
+    .footer-links ul li {
+        margin: 5px 0;
+        font-size: 1.2rem;
+    }
+
+    .footer-links ul:nth-child(3) li {
+        margin-top: 15px;
+    }
+
+    footer .deco p {
+        font-size: 15vw;
+    }
+}
+
+/* Small Mobile Phones (Max Width 480px) */
+@media (max-width: 480px) {
+    nav {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+        gap: 10px;
+    }
+
+    nav .links {
+        width: 100%;
+    }
+
+    nav .links ul {
+        justify-content: space-around;
+    }
+
+    main .hero h1 .fName {
+        font-size: 4.5rem;
+    }
+
+    main .hero h1 .lName {
+        font-size: 3rem;
+    }
+
+    main .hero p {
+        width: 100%;
         font-size: 1rem;
         font-family: "Geist", sans-serif;
-        letter-spacing: 3px;
+        letter-spacing: 4px;
         line-height: 30px;
         text-transform: uppercase;
-        text-align: left;
-        z-index: 100;
+        text-align: justify;
+        margin-top: 50px;
     }
 
-    .dsa-skill .leetcode-tooltip {
-        position: absolute;
-        border: 2px dotted var(--text-color);
-        width: 150px;
-        height: 50px;
-        display: grid;
-        place-items: center;
-        left: 20%;
-        display: none;
-        /* transform: skewX(10deg); */
+    .projects h1,
+    .skills h1 {
+        font-size: 3rem;
     }
 
-    .dsa-skill .leetcode-tooltip a {
-        color: var(--text-color);
-        text-decoration: none;
+    .card-header .num {
+        font-size: 2rem;
+    }
+
+    .card-header h3 {
+        font-size: 1.5rem;
+    }
+
+    .card-tags span,
+    .dsa-tag {
         font-size: 0.9rem;
-        font-weight: 600;
-        font-family: "Geist", sans-serif;
+        padding: 6px 12px;
     }
 
+    #message {
+        display: none;
+    }
+
+    footer h1 {
+        font-size: 3.5rem;
+    }
+
+    footer .deco p {
+        font-size: 25vw;
+    }
+
+    footer {
+        padding: 20px 10px;
+    }
 }
