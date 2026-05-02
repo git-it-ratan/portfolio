@@ -1,22 +1,8 @@
 @font-face {
-    font-family: 'Editorial';
-    src: url('fonts/editorial-new-font-family-1753510918-0/PPEditorialNew-Regular-BF644b214ff145f.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
     font-family: 'Kenoky';
     src: url('fonts/kenoky/KenokyLight-3zezL.ttf') format('opentype');
     font-weight: normal;
     font-style: normal;
-}
-
-@font-face {
-    font-family: 'Array';
-    src: url('fonts/Array_Complete/Array_Complete/Fonts/OTF/Array-Regular.otf') format('opentype');
-    font-style: normal;
-    font-weight: normal;
 }
 
 :root {
@@ -24,7 +10,6 @@
     /* 020202 */
     --bg-color: #d3d3d3;
     /* d3d3d3 */
-    --highlight-color: #ffb300;
 }
 
 * {
@@ -234,7 +219,6 @@ main .hero {
 
 main .hero h1 .fName {
     font-size: 12rem;
-    /* font-family: "Editorial", Arial, Helvetica, sans-serif; */
     font-family: "Kenoky", sans-serif;
     font-weight: 100;
     display: flex;
@@ -522,6 +506,17 @@ main .skills {
     border-bottom: 2px dotted var(--text-color);
     padding-bottom: 15px;
     margin-bottom: 25px;
+    transition: border-bottom 0.3s ease;
+}
+
+.edu-card .card-header {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.edu-card .card-header .num {
+    margin-right: 0;
 }
 
 .card-header .num {
@@ -621,6 +616,111 @@ main .skills {
     color: var(--bg-color);
 }
 
+/* --- Education Section --- */
+.education {
+    width: 100%;
+    min-height: 100vh;
+    border-bottom: 2px dotted var(--text-color);
+    padding: 100px 0;
+}
+
+.education h1 {
+    font-size: 6rem;
+    font-family: "Doto", cursive;
+    font-weight: 200;
+    text-align: center;
+    margin-bottom: 80px;
+    color: var(--text-color);
+}
+
+.education-grid {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    width: 100%;
+    position: relative;
+    z-index: 5;
+    align-items: stretch;
+}
+
+.edu-card {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    flex: 1;
+    border: 2px dotted var(--text-color);
+    padding: 30px;
+    align-items: center;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background-color: transparent;
+}
+
+/* 
+.edu-card:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+} */
+
+/* .edu-card:hover .card-header .num,
+.edu-card:hover .card-header h3,
+.edu-card:hover .edu-details p {
+    color: var(--bg-color);
+} */
+
+/* .edu-card:hover .card-header {
+    border-bottom: 2px dotted var(--bg-color);
+} */
+
+.edu-image {
+    width: 100%;
+    height: 300px;
+    border: 1px solid var(--text-color);
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* .edu-card:hover .edu-image {
+    border-color: var(--bg-color);
+} */
+
+.edu-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 15px;
+    filter: grayscale(100%);
+    transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+.edu-info {
+    width: 100%;
+}
+
+.edu-details p {
+    font-family: "Geist", sans-serif;
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.edu-type {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.edu-year {
+    font-family: "Doto", sans-serif !important;
+}
+
+.edu-score {
+    font-weight: 600;
+    font-size: 1.6rem !important;
+}
+
 #message {
     width: 100%;
     min-height: 100vh;
@@ -674,15 +774,6 @@ main .skills {
     text-align: center;
     letter-spacing: -1px;
     /* margin: 50px 0; */
-}
-
-#certificates .desc p {
-    font-size: 1.5rem;
-    font-family: "Editorial", cursive;
-    color: var(--text-color);
-    font-weight: 200;
-    text-align: center;
-    letter-spacing: 2px;
 }
 
 #certificates .certificate-slide {
@@ -1048,6 +1139,11 @@ footer .deco p {
         padding-bottom: 20px;
         justify-content: center;
     }
+
+    .edu-image {
+        flex: 0 0 280px;
+        height: 200px;
+    }
 }
 
 /* Tablets & Large Phones (Max Width 768px) */
@@ -1200,6 +1296,32 @@ footer .deco p {
     footer .deco p {
         font-size: 15vw;
     }
+
+    .education h1 {
+        font-size: 4rem;
+        margin-bottom: 40px;
+    }
+
+    .edu-card {
+        flex-direction: column;
+        padding: 30px;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .edu-image {
+        flex: 0 0 auto;
+        width: 100%;
+        height: 250px;
+    }
+
+    .edu-card .card-header {
+        justify-content: center;
+    }
+
+    .edu-card .card-header .num {
+        margin-right: 15px;
+    }
 }
 
 /* Small Mobile Phones (Max Width 480px) */
@@ -1271,5 +1393,40 @@ footer .deco p {
 
     footer {
         padding: 20px 10px;
+    }
+
+    .education {
+        padding: 40px 20px;
+    }
+
+    .education-grid {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .edu-image {
+        flex: 0 0 auto;
+        width: 100%;
+        height: 250px;
+    }
+
+    .edu-card .card-header {
+        justify-content: center;
+    }
+
+    .edu-card .card-header .num {
+        margin-right: 15px;
+    }
+
+    .education h1 {
+        font-size: 3rem;
+    }
+
+    .edu-details p {
+        font-size: 1.1rem;
+    }
+
+    .edu-score {
+        font-size: 1.3rem !important;
     }
 }

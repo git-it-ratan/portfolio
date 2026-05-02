@@ -82,6 +82,20 @@ window.addEventListener("load", () => {
         duration: 0.8,
         ease: "power3.out"
     });
+
+    gsap.from(".edu-card", {
+        scrollTrigger: {
+            trigger: ".education-grid",
+            scroller: "body",
+            start: "top 85%",
+            toggleActions: "play none none reverse"
+        },
+        // y: 100,
+        // opacity: 0,
+        stagger: 0.3,
+        duration: 1,
+        ease: "power3.out"
+    });
     gsap.from(linkSplit.chars, {
         scrollTrigger: {
             trigger: ".link",
@@ -272,7 +286,7 @@ touchLetter.addEventListener("mouseleave", () => {
 const projectDetails = {
     'ArtsByFnB': {
         title: 'ArtsByFnB',
-        image: 'images/ArtsByFnB.png',
+        image: 'images/ArtsByFnB.webp',
         link: 'https://git-it-ratan.github.io/artsbyfnb/',
         desc: 'ArtsByFnB is a clean, handmade craft showcase website that highlights artisanal home décor and gift items. It combines modern styling with simple navigation to help visitors browse products and brand story easily. ',
         colors: ['#ffd6ee', '#070a13', '#ed7b84'],
@@ -281,7 +295,7 @@ const projectDetails = {
     },
     'Meridian': {
         title: 'Meridian',
-        image: 'images/meridian.png',
+        image: 'images/meridian.webp',
         link: 'https://git-it-ratan.github.io/meridian/',
         desc: 'Meridian is an AI-powered career guidance web app that analyzes your skills and interests to recommend a best-fit role and personalized roadmap. It combines a sleek frontend with a Node/Express backend and Google Gemini AI. The app turns career goals into actionable learning steps.',
         colors: ['#ebebeb', '#050505', '#6153CC'],
@@ -290,7 +304,7 @@ const projectDetails = {
     },
     'Avisa': {
         title: 'Avisa',
-        image: 'images/avisa.png',
+        image: 'images/avisa.webp',
         link: 'https://git-it-ratan.github.io/avisa/',
         desc: 'Built for IIT Patna\'s frontend competition; conceptualized and led the full creative direction of an interactive ocean-depth storytelling experience.',
         colors: ['#0a3d6b', '#d9e5d6', '#8CAE68'],
@@ -299,7 +313,7 @@ const projectDetails = {
     },
     'CheckTheFit': {
         title: 'CheckTheFit',
-        image: 'images/CheckTheFit.png',
+        image: 'images/CheckTheFit.webp',
         link: 'https://git-it-ratan.github.io/checkthefit/',
         desc: '[Ongoing] CheckTheFit is a lightweight web project that helps users explore outfit options with a clean, responsive UI. It combines HTML, CSS, and JavaScript to deliver a polished browsing experience for checking style and fit. The project is ideal for showcasing a fashion-focused landing page or interactive product preview.',
         colors: ['#fff', '#000', '#b7a7e6'],
